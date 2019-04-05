@@ -45,7 +45,26 @@ class AppNavbar extends React.Component {
                     Bootstrap
                   </NavLink>
                 </NavItem>
-
+                <NavItem>
+                  <NavLink href="https://www.mongodb.com/">
+                    MongoDB Atlas
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="https://dashboard.heroku.com/">
+                    Heroku
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="https://jwt.io/">
+                    JWT
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink href="https://www.getpostman.com/">
+                    Postman
+                  </NavLink>
+                </NavItem>
               </Nav>
             </Collapse>
           </Container>
