@@ -49,7 +49,7 @@ router.post('/',(req,res)=>{
 });
 
 //@route GET api/auth/user
-//@desc Get user data, keep check token and show user info such as name, id, email but not password
+//@desc Get user data, keep check token and show user who is loggin in by name, id, email but not password 
 //@access Private
 router.get('/user',auth,(req,res)=>{
   User.findById(req.user.id)

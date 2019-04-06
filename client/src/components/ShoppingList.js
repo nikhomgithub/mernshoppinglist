@@ -23,12 +23,16 @@ class ShoppingList extends Component {
         <ListGroup>
             {items.map(({_id,name})=>(
                 <ListGroupItem key={_id}>
-                <Button
-                  className="remove-btn"
-                  color="danger"
-                  size="sm"
-                  onClick={this.onDeleteClick.bind(this,_id)}
-                >&times;</Button>
+
+                {this.props.isAuthenticated ?
+                  <Button
+                    className="remove-btn"
+                    color="danger"
+                    size="sm"
+                    onClick={this.onDeleteClick.bind(this,_id)}
+                  >&times;</Button>
+                  : null}
+
                   {name}
                 </ListGroupItem>
             ))}
@@ -41,10 +45,12 @@ class ShoppingList extends Component {
 ShoppingList.propTypes={
   getItems:PropTypes.func.isRequired,
   deleteItem:PropTypes.func.isRequired,
-  item:PropTypes.object.isRequired
+  item:PropTypes.object.isRequired,
+  isAuthenticated:PropTypes.bool,
 }
 
 const mapStateToProps=(state)=>({
+  isAuthenticated:state.auth.isAuthenticated,
   item: state.item
 })
 
