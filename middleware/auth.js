@@ -15,7 +15,7 @@ function auth(req,res,next){
     //we can get req.user.id from decoded
     next();
   }
-  catch{
+  catch(err){
     res.status(400).json({msg:'Token is not valid'})
   }
 
