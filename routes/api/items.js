@@ -38,3 +38,14 @@ router.delete('/:id',auth,(req,res)=>{
 });
 
 module.exports = router;
+
+/*
+Header
+key:Content-Type
+value:application/json
+
+key:x-auth-token
+value: token.....
+
+
+*/
