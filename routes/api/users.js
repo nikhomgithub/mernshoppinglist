@@ -9,6 +9,19 @@ const jwt=require('jsonwebtoken');
 //@route POST api/users
 //@desc Register new user
 //@access Public 
+/*
+POST:localhost:5000/api/users
+Headers
+KEY:Content-Type
+Value:application/json
+Body(raw)
+{
+	"name":"c",
+	"email":"c@email.com",
+	"password":"c"
+}
+*/
+
 router.post('/',(req,res)=>{
   const {name,email,password}=req.body;
   //Simple validation
