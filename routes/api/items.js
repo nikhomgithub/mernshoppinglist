@@ -8,6 +8,13 @@ const Item=require('../../models/Item');
 //@route GET api/items
 //@desc Get All Items
 //@access Public 
+/*
+GET:localhost:5000/api/items
+Headers
+KEY:Content-Type
+Value:application/json
+*/
+
 router.get('/',(req,res)=>{
   Item.find()
     .sort({date:-1})
