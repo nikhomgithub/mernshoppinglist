@@ -63,6 +63,17 @@ router.post('/',(req,res)=>{
 //@route GET api/auth/user
 //@desc Get user data, keep check token and show user who is loggin in by name, id, email but not password 
 //@access Private
+/*
+GET:localhost:5000/api/user
+Headers
+KEY:Content-Type
+Value:application/json
+KEY:x-auth-token
+Value:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVkMjE3NTYwZTE0NWY3MTNiMWEwZjVjMiIsImlhdCI6MTU2MjQ3NDM1MywiZXhwIjoxNTYyNDc3OTUzfQ.jnzzp84wN7bAJCEYEPi06i8eNW_IENI6Gew4aw0paJY
+
+*/
+
+
 router.get('/user',auth,(req,res)=>{
   User.findById(req.user.id)
     .select('-password')
