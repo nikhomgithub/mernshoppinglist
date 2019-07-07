@@ -10,6 +10,18 @@ const auth=require('../../middleware/auth');
 //@route POST api/auth
 //@desc Authenticate Login Existing User
 //@access Public 
+/*
+POST:localhost:5000/api/users
+Headers
+KEY:Content-Type
+Value:application/json
+Body(raw)
+{
+	"email":"c@email.com",
+	"password":"c"
+}
+*/
+
 router.post('/',(req,res)=>{
   const {email,password}=req.body;
 
