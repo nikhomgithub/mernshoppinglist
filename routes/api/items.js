@@ -38,6 +38,7 @@ router.post('/',auth,(req,res)=>{
 //@route Delete api/items/id
 //@desc Delete an Item
 //@access Private
+
 router.delete('/:id',auth,(req,res)=>{
     Item.findById(req.params.id)
       .then(item=>item.remove().then(()=>res.json({success:true})))
