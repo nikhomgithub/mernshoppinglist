@@ -109,9 +109,13 @@ xxxx  แต่ถ้า เกิด err จะส่งค่า success:false
 ===========================================
 ===========================================
 ขั้นตอนการทำ
+server
 1. ทำฝั่ง server ก่อน แล้วทดสอบด้วย  Postman และ ดุ data ที่  mongodbatlas
-2. ทำฝั่ง client โดยสร้าง store กับ reducer + initstate ก่อน ยังไม่ต้องใส่ switch ก็ได้
-3. ค่อยๆ สร้าง component ขึ้นมา แล้ว manual เปลี่ยน state เอง
+client
+2. ออกแบบ state ทั้งหมด ทั้งใน reducer และ ในแต่ละ component 
+3. โดยสร้าง store กับ reducer + initstate ก่อน ยังไม่ต้องใส่ switch ก็ได้
+4. สร้าง action ให้เปลี่ยน state ตามไป
+3. ค่อยๆ สร้าง component ขึ้นมา 
 
 
 
