@@ -7,35 +7,35 @@ import {clearErrors} from '../../actions/errorActions';
 
 class Login extends Component {
   state={
-    modal:false,
+    modal:false,//true = open modal , false = close modal
     email:'',
     password:'',
-    msg:null
+    msg:null //error message from server in case of login error 
   }
 
-  componentDidUpdate(prevProps){
+  componentDidUpdate(prevProps){ //keep checking whether error message coming or not
     const{error} = this.props;
-    if(error !== prevProps.error){
+    if(error !== prevProps.error){ //check error is valid 
       //Check for register error
-      if(error.id ==='LOGIN_FAIL'){
-        this.setState({msg:error.msg.msg});
+      if(error.id ==='LOGIN_FAIL'){ //error from server 
+        this.setState({msg:error.msg.msg}); //send error message to state
       }else{
-        this.setState({msg:null});
+        this.setState({msg:null}); 
       }
     }
-
+    //To close modal if it is modal=true(opening) + login success (isAuthenticated=true) 
     if(this.state.modal){
       if(this.props.isAuthenticated){
-        this.toggle();
+        this.toggle(); //toggle will change modal to false (close)
       }
     }
   }
-
+  //to change state of modal 
   toggle=()=>{
     //Clear errors
     this.props.clearErrors();
     this.setState({
-      modal:!this.state.modal
+      modal:!this.state.modal //change modal from true->false, false->true
     });
   }
 
@@ -62,7 +62,7 @@ class Login extends Component {
         </NavLink>
         <Modal
           isOpen={this.state.modal}
-          toggle={this.toggle}
+          toggle={this.toggle} //this "x" to close modal
         >
           <ModalHeader toggle={this.toggle}> 
             Login
