@@ -1,3 +1,62 @@
+การ upload บน heroku
+
+ในโปรเจค มี สองส่วน 
+ส่วน server มีไฟล์ server.js  ใน project folder
+และ ส่วน client เป็น โฟลเดอร์ ย่อย (ต้อง ลบ .git ใน client ออกด้วย 
+และเพิ่ม "proxy": "http://localhost:5000", ใน package ใน  client ด้วย)
+
+หลังจากนั้นต้องทำการแก้ไขใน package ใน project ด้วย
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build  --prefix client "
+   },  
+  "dependencies": {
+    "concurrently": "^4.1.1",
+    "express": "^4.17.1"
+  }
+ 
+ ใน Server.js ต้องมีอย่างน้อยแค่นี้
+  const express=require('express');
+  const path=require('path');
+  const app=express();
+
+  app.get('/ok',(req,res)=>res.json({msg:"OK"}));
+
+  //Serve static assets if in production
+  if(process.env.NODE_ENV==='production'){
+    //Set static folder
+    app.use(express.static('client/build'));
+    app.get('*',(req,res)=>{
+      res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+    })
+  }
+  const port=process.env.PORT || 5000;  //ต้องใช้ ค่าใน env
+  app.listen(port,()=>console.log(`Server on port ${port}`));
+  
+  กลับมาที่หน้า terminal
+  $sudo chmod -R 777 .
+  $cd client
+  $rm -rf .git
+  $cd ..
+  $heroku login
+  $heroku create
+  $heroku git:clone -a evening-gorge-56618  //ได้หลังจากสร้างใน heroku
+  $.git init
+  $touch .gitignore แก้ไขในไฟล์นี้ดังนี้ 
+    /node_modules
+    /client/node_modules
+  $git add .
+  $ git commit -am "make it better"
+  $ git push heroku master
+เราจะได้ url .com ไว้ใช้งานแล้ว
+https://evening-gorge-56618.herokuapp.com/
+
+
+
 https://github.com/bradtraversy/mern_shopping_list
 
 
