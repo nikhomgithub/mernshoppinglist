@@ -1,1 +1,55 @@
-sdfsfsad
+Actions
+errorActions         authActions                               itemActions
+  returnErrors          register                                  getItems
+  clearErrors           loadUser                                  addItem 
+                        logout                                    deleteItem
+                        login                                     setItemsLoading
+                        tokenConfig
+
+errorReducer         authReducer                               itemReducer
+  msg:{},               token:localStorage.getItem('token')       item:[],
+  status:null,          isAuthenticated:false,                    loading:false  
+  id:null               isLoading:false,
+                        user:null  
+  GET_ERRORS            USER_LOADING                              GET_ITEMS
+  CLEAR_ERRORS          USER_LOADED                               DELETE_ITEM
+                        LOGIN_SUCCESS                             ADD_ITEM  
+                          REGISTER_SUCCESS                        ITEMS_LOADING
+                        LOGIN_FAIL,LOGOUT_SUCCESS,
+                          AUTH_ERROR,REGISTER_FAIL
+
+How to access store/state from component     
+  this.props.item
+  this.props.error
+  this.props.auth
+  
+How to access action from another action
+  dispatch(action_name(arg1,arg2))
+
+How to access reducer from action
+  dispatch({
+    type:SOME_THING
+    payload:some_thing
+  })
+  
+How to access action from component
+  outside <Provider store={store}/>
+        store.dispatch(loadUser())
+  inside <Provider store={store}/>
+        this.props.action_name()
+ 
+loadUser()
+     dispatch(USER_LOADING)          =>  isLoading:true
+     axios.get('api/auth/user)
+         .then (dispatch(USER_LOADED,payload) 
+                                     =>  isAuthenticated:true,
+                                         isLoading:false,
+                                         user:action.payload                                         
+         .catch (returnErrror(err,stutus,null)
+                dispatch(GET_ERROR)  =>  msg:err
+                                         status:status
+                                         id:null
+                dispatch(AUTH_ERROR) =>  token:null,
+                                         isAuthenticated:false,
+                                         isLoading:false,
+                                         user:null
