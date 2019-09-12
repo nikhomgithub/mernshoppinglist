@@ -11,6 +11,7 @@ errorReducer         authReducer                               itemReducer
   status:null,          isAuthenticated:false,                    loading:false  
   id:null               isLoading:false,
                         user:null  
+                        
   GET_ERRORS            USER_LOADING                              GET_ITEMS
   CLEAR_ERRORS          USER_LOADED                               DELETE_ITEM
                         LOGIN_SUCCESS                             ADD_ITEM  
@@ -40,7 +41,7 @@ How to access action from component
  
 loadUser()
      dispatch(USER_LOADING)          =>  isLoading:true
-     axios.get('api/auth/user)
+     axios.get('/api/auth/user)
          .then (dispatch(USER_LOADED,payload) 
                                      =>  isAuthenticated:true,
                                          isLoading:false,
@@ -49,7 +50,71 @@ loadUser()
                 dispatch(GET_ERROR)  =>  msg:err
                                          status:status
                                          id:null
-                dispatch(AUTH_ERROR) =>  token:null,
+                dispatch(AUTH_ERROR) =>  token:null, (localStorage.removeItem('token'))
                                          isAuthenticated:false,
                                          isLoading:false,
                                          user:null
+                                         
+login(email,password)                                         
+     axios.post('/api/auth')
+         .then (dispatch(LOGIN_SUCCESS,payload)
+                                         token:action.payload.token (localStorage.setItem('token',action.payload.token))
+                                         user:action.payload.user
+                                         isAuthenticated:true,
+                                         isLoading:false,
+         .catch (returnErrror(err,stutus,LOGIN_FAIL)
+                dispatch(GET_ERROR)  =>  msg:err
+                                         status:status
+                                         id:LOGIN_FAIL
+                dispatch(LOGIN_FAIL) =>  token:null (localStorage.removeItem('token'))
+                                         isAuthenticated:false,
+                                         isLoading:false,
+                                         user:null
+
+logout()
+   dispatch(LOGOUT_SUCCESS)          =>  token:null,  (localStorage.removeItem('token'))
+                                         isAuthenticated:false,
+                                         isLoading:false,
+                                         user:null
+                                         
+register(newUser)
+   axios.post('/api/users/')
+       .then(dispatch(REGISTER_SUCCESS,payload)
+                                         token:action.payload.token (localStorage.setItem('token',action.payload.token))
+                                         user:action.payload.user
+                                         isAuthenticated:true,
+                                         isLoading:false,
+       .catch (returnErrror(err,stutus,REGISTER_FAIL)
+                dispatch(GET_ERROR)  =>  msg:err
+                                         status:status
+                                         id:REGISTER_FAIL
+                dispatch(REGISTER_FAIL)
+                                     =>  token:null (localStorage.removeItem('token'))
+                                         isAuthenticated:false,
+                                         isLoading:false,
+                                         user:null
+                                         
+addItem(newItem)       
+   axios.post('/api/items/')
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                   
+                                         
+                                         
