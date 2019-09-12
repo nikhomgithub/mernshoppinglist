@@ -96,14 +96,34 @@ register(newUser)
                                          
 addItem(newItem)       
    axios.post('/api/items/')
+       .then (dispatch(ADD_ITEM,payload)
+                                     =>  items:[action.payload,...state.items]    
+       .catch (returnErrror(err,stutus,null)
+                dispatch(GET_ERROR)  =>  msg:err
+                                         status:status
+                                         id:null
                                          
+deleteItem(id)
+   axios.delete('/api/tems/${id}')
+       .then(dispatch(DELETE_ITEM,payload)
+                                     => items : state.items.filter(item=>item._id!==action.payload)
+       
+       .catch(returnErrror(err,stutus,null)
+                dispatch(GET_ERROR)  =>  msg:err
+                                         status:status
+                                         id:null 
                                          
-                                         
-                                         
-                                         
-                                         
-                                         
-                                         
+getItem()
+   dispatch(setItemsLoading())
+       dispatch(ITEMS_LOADING)       =>  loading:true
+   axios.get('/api/items')                                 
+       .then( dispatch(GET_ITEMS,payload)
+                                     =>  items:action.payload,
+                                         loading:false
+       .catch(returnErrror(err,stutus,null)
+                dispatch(GET_ERROR)  =>  msg:err
+                                         status:status
+                                         id:null                          
                                          
                                          
                                          
